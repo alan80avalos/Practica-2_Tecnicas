@@ -1,0 +1,31 @@
+name: Enviar notificación por correo
+
+on:
+  push:
+    branches:
+      - main
+      - feature_a
+      - feature_b
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+
+      - name: Enviar correo de notificación
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USER }}
+          password: ${{ secrets.EMAIL_PASS }}
+          subject: |
+            Cambios subidos a rama ${{ github.ref_name }}
+          body: |
+            Se han subido cambios a la rama ${{ github.ref_name }} del repositorio.
+            Revisa los últimos commits.
+          to: destinatario@ejemplo.com
+          from: ${{ secrets.EMAIL_USER }}
