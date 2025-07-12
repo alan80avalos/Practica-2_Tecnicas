@@ -27,5 +27,6 @@ jobs:
           body: |
             Se han subido cambios a la rama ${{ github.ref_name }} del repositorio.
             Revisa los últimos commits.
-          to: destinatario@ejemplo.com
+          to: |
+            miguel.flores@iteso.mx,mauricio.figueroa@iteso.mx,alejando.rodriguez@iteso.mx
           from: ${{ secrets.EMAIL_USER }}
